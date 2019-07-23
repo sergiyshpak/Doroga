@@ -21,10 +21,13 @@ def getLess2000(nodesM):
 
 def get2000Sosedi(mech1,nodesM1):
     resultList1=[]
+    # regular gates
     for para in regularGate:
         if para[0]==mech1:
             if nodesM1[para[1]]==2000:
                 resultList1.append(para[1])
+    #jump gates
+    
     return resultList1
 
 
@@ -38,6 +41,19 @@ with open("RegularGates.csv", "r") as ins:
         line = line[:-1]
         my_list = line.split(",")
         regularGate.append(my_list)
+
+
+jumpGate=[]
+#    lines like  sysid,sysid     ex  30000777,30000778
+# no headers
+with open("JumpGates.csv", "r") as ins:
+    for line in ins:
+        line = line[:-1]
+        my_list = line.split(",")
+        jumpGate.append(my_list)
+
+
+
 
 systemDictIdName= {} 
 systemDictNameId={}
