@@ -42,3 +42,6 @@ finishSysa="1DQ1-A"
 
 startSysa=startSysa.upper()
 finishSysa=finishSysa.upper()
+
+
+print("Shortest Path from "+startSysa+" to "+finishSysa)
