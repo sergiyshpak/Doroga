@@ -5,14 +5,7 @@ Created on Tue Jul 23 13:30:22 2019
 @author: g705586
 """
 
-
-
-import requests
-import json
-import time 
-import sys
-import math
-
+import datetime
 
 def exists2000(dict):
     #for d in dict:
@@ -33,6 +26,9 @@ def get2000Sosedi(mech1,nodesM1):
             if nodesM1[para[1]]==2000:
                 resultList1.append(para[1])
     return resultList1
+
+
+print(str(datetime.datetime.now()))
 
 regularGate=[]
 #    lines like  sysid,sysid     ex  30000777,30000778
@@ -58,7 +54,7 @@ with open("SolarSystems.csv", "r") as ins:
         systemSec[my_list[2].strip()] = my_list[4]     #map id:sec
 
 
-print(len(regularGate))
+#print(len(regularGate))
 
 startSysa="Jita"
 finishSysa="1DQ1-A"
@@ -85,9 +81,9 @@ nodesMarked[startSysaId]=0
 while nodesMarked.get(finishSysaId)==2000 and exists2000(nodesMarked):
     less2000=[]
     less2000=getLess2000(nodesMarked)
-    print("----------------")
+    #print("----------------")
     for mecheno in less2000:
-        print("polo1 "+systemDictIdName.get(mecheno)+"  metka "+str(nodesMarked.get(mecheno)))
+     #   print("polo1 "+systemDictIdName.get(mecheno)+"  metka "+str(nodesMarked.get(mecheno)))
         currentNum=nodesMarked.get(mecheno)
         sosedi=[]
         sosedi=get2000Sosedi(mecheno,nodesMarked)
@@ -97,3 +93,4 @@ while nodesMarked.get(finishSysaId)==2000 and exists2000(nodesMarked):
      
     
 print ( "path length is "+str(nodesMarked.get(finishSysaId)))
+print(str(datetime.datetime.now()))
