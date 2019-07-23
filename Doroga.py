@@ -7,10 +7,7 @@ Created on Tue Jul 23 13:30:22 2019
 
 import datetime
 
-def exists2000(dict):
-    #for d in dict:
-        
-    return True
+
 
 def getLess2000(nodesM):
     resultList=[]
@@ -27,11 +24,27 @@ def get2000Sosedi(mech1,nodesM1):
             if nodesM1[para[1]]==2000:
                 resultList1.append(para[1])
     #jump gates
+    for para in jumpGate:
+        if para[0]==mech1:
+            if nodesM1[para[1]]==2000:
+                resultList1.append(para[1])
     
     return resultList1
 
 
-print(str(datetime.datetime.now()))
+def getprev(las,lasNum,nodesM1):
+    result="aaa"
+    for para in regularGate:
+        if para[0]==las:
+            if nodesM1[para[1]]==lasNum-1:
+                result=para[1]
+    for para in jumpGate:
+        if para[0]==las:
+            if nodesM1[para[1]]==lasNum-1:
+                result=para[1]
+    return result
+
+print("------------------"+str(datetime.datetime.now()))
 
 regularGate=[]
 #    lines like  sysid,sysid     ex  30000777,30000778
@@ -72,8 +85,8 @@ with open("SolarSystems.csv", "r") as ins:
 
 #print(len(regularGate))
 
-startSysa="Jita"
-finishSysa="1DQ1-A"
+startSysa="h74-b0"
+finishSysa="1dq1-a"
 
 startSysa=startSysa.upper()
 finishSysa=finishSysa.upper()
@@ -106,7 +119,21 @@ while nodesMarked.get(finishSysaId)==2000 and exists2000(nodesMarked):
         for sosa in sosedi:
             nodesMarked[sosa]=currentNum+1
             
-     
-    
 print ( "path length is "+str(nodesMarked.get(finishSysaId)))
-print(str(datetime.datetime.now()))
+
+lasto=finishSysaId
+lastoNum=nodesMarked.get(finishSysaId)
+stakolist=[]
+
+while lasto!=startSysaId:
+    stakolist.append(lasto) 
+    lasto=getprev(lasto,lastoNum,nodesMarked)
+    lastoNum=lastoNum-1
+    
+print(startSysa) 
+while len(stakolist)>0:
+    print(systemDictIdName.get(stakolist.pop()))
+
+    
+
+print("--------------------"+str(datetime.datetime.now()))
