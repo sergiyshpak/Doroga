@@ -38,10 +38,12 @@ def getprev(las,lasNum,nodesM1):
         if para[0]==las:
             if nodesM1[para[1]]==lasNum-1:
                 result=para[1]
+                tipolist.append("regular")
     for para in jumpGate:
         if para[0]==las:
             if nodesM1[para[1]]==lasNum-1:
                 result=para[1]
+                tipolist.append("JumpGato")
     return result
 
 print("------------------"+str(datetime.datetime.now()))
@@ -85,8 +87,24 @@ with open("SolarSystems.csv", "r") as ins:
 
 #print(len(regularGate))
 
-startSysa="h74-b0"
-finishSysa="1dq1-a"
+
+
+
+
+startSysa= "ARZANNI"    # "J-LPX7"
+finishSysa="1DQ1-A"
+
+
+startSysa= "1DQ1-A"    # "J-LPX7"
+finishSysa="ARZANNI"
+
+startSysa= "H74-b0"    # "J-LPX7"
+finishSysa="MORO"
+
+
+
+
+
 
 startSysa=startSysa.upper()
 finishSysa=finishSysa.upper()
@@ -125,14 +143,18 @@ lasto=finishSysaId
 lastoNum=nodesMarked.get(finishSysaId)
 stakolist=[]
 
+tipolist=[]
+tipolist.append("the_end")
+
 while lasto!=startSysaId:
     stakolist.append(lasto) 
     lasto=getprev(lasto,lastoNum,nodesMarked)
     lastoNum=lastoNum-1
     
-print(startSysa) 
+
+print(startSysa+" -- " +"  --  "+tipolist.pop())
 while len(stakolist)>0:
-    print(systemDictIdName.get(stakolist.pop()))
+    print(systemDictIdName.get(stakolist.pop())+" -- " +"  --  "+tipolist.pop())
 
     
 
